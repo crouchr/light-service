@@ -44,15 +44,14 @@ if not (sensor.isOnline()):
 
 fp_out = open('../data/lux.tsv', 'w')
 
-sleep_secs = 10
+sleep_mins = 10
 
 while sensor.isOnline():
-    #print("Light :  " + str(int(sensor.get_currentValue())) + " lx (Ctrl-C to stop)")
-    lux = int(sensor.get_currentValue())
+    lux = round(sensor.get_currentValue(), 3)
     lux_rec = time.ctime() + '\t' + lux.__str__()
     fp_out.write(lux_rec + '\n')
     fp_out.flush()
     print(lux_rec)
-    YAPI.Sleep(1000 * sleep_secs)
+    YAPI.Sleep(60 * 1000 * sleep_mins)
 
 YAPI.FreeAPI()
