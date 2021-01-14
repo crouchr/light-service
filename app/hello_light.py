@@ -42,8 +42,17 @@ else:
 if not (sensor.isOnline()):
     die('device not connected')
 
+fp_out = open('../data/lux.tsv', 'w')
+
+sleep_secs = 10
+
 while sensor.isOnline():
-    print("Light :  " + str(int(sensor.get_currentValue())) + " lx (Ctrl-C to stop)")
-    YAPI.Sleep(1000)
+    #print("Light :  " + str(int(sensor.get_currentValue())) + " lx (Ctrl-C to stop)")
+    lux = int(sensor.get_currentValue())
+    lux_rec = time.ctime() + '\t' + lux.__str__()
+    fp_out.write(lux_rec + '\n')
+    fp_out.flush()
+    print(lux_rec)
+    YAPI.Sleep(1000 * sleep_secs)
 
 YAPI.FreeAPI()
