@@ -45,4 +45,5 @@ if not (sensor.isOnline()):
 while sensor.isOnline():
     print("Light :  " + str(int(sensor.get_currentValue())) + " lx (Ctrl-C to stop)")
     YAPI.Sleep(1000)
+
 YAPI.FreeAPI()
