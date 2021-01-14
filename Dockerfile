@@ -5,6 +5,9 @@ LABEL description="Light measurement microservice"
 # Generate logs in unbuffered mode
 ENV PYTHONUNBUFFERED=1
 
+RUN apt-get -y update
+RUN apt-get -y install libusb-1.0.0 libusb-1.0.0-dev
+
 # Install Python dependencies
 RUN pip3 install pipenv
 COPY Pipfile* ./
