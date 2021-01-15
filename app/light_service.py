@@ -50,12 +50,14 @@ def get_lux_api():
         app_name = request.args.get('app_name')
 
         lux = light_sensor.get_lux(Sensor)
+        sky_condition = light_service_funcs.map_lux_to_sky_condition(lux)
 
-        print('get_lux_api() : app_name=' + app_name.__str__() + ', lux=' + lux.__str__())
+        print('get_lux_api() : app_name=' + app_name.__str__() + ', lux=' + lux.__str__(), 'sky_condition=' + sky_condition)
 
         # Create response
         answer['status'] = 'OK'
         answer['lux'] = lux
+        answer['sky_condition'] = sky_condition
 
         response = jsonify(answer)
 

@@ -45,7 +45,7 @@ def get_lux(sensor):
 
     if sensor.isOnline():
         lux = round(sensor.get_currentValue(), 2)
-        if lux < 1.0:
+        if lux < 0.1:
             lux = 0.0       # headlights of passing cars ?
         return lux
     else:
