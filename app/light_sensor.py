@@ -34,8 +34,6 @@ def register_light_sensor(target='any'):
         return None
 
 
-
-
 def get_lux(sensor):
     """
     Read light level (in Lux) from light sensor
@@ -44,7 +42,7 @@ def get_lux(sensor):
     """
 
     if sensor.isOnline():
-        lux = round(sensor.get_currentValue(), 2)
+        lux = sensor.get_currentValue()
         if lux < 0.1:
             lux = 0.0       # headlights of passing cars ?
         return lux

@@ -57,10 +57,11 @@ def get_lux_api():
         time.sleep(0.5)
         lux3 = light_sensor.get_lux(Sensor)
         lux = (lux1 + lux2 + lux3) / 3.0
+        lux_avg = round(lux, 2)
 
-        sky_condition = light_service_funcs.map_lux_to_sky_condition(lux)
+        sky_condition = light_service_funcs.map_lux_to_sky_condition(lux_avg)
 
-        print('get_lux_api() : app_name=' + app_name.__str__() + ', lux=' + lux.__str__(), 'sky_condition=' + sky_condition)
+        print('get_lux_api() : app_name=' + app_name.__str__() + ', lux=' + lux_avg.__str__(), 'sky_condition=' + sky_condition)
 
         # Create response
         answer['status'] = 'OK'
