@@ -49,7 +49,12 @@ def get_lux_api():
         answer = {}
         app_name = request.args.get('app_name')
 
-        lux = light_sensor.get_lux(Sensor)
+        # very crude averaging - take two readings with 1 second between
+        lux1 = light_sensor.get_lux(Sensor)
+        time.sleep(1)
+        lux2 = light_sensor.get_lux(Sensor)
+        lux = (lux1 + lux2) / 2.0
+
         sky_condition = light_service_funcs.map_lux_to_sky_condition(lux)
 
         print('get_lux_api() : app_name=' + app_name.__str__() + ', lux=' + lux.__str__(), 'sky_condition=' + sky_condition)
