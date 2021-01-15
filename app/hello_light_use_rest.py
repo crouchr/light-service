@@ -23,7 +23,8 @@ def main():
         while True:
             status_code, response_dict = call_rest_api.call_rest_api(endpoint_base + '/get_lux', query)
             lux = response_dict['lux']
-            lux_rec = time.ctime() + '\t' + lux.__str__()
+            sky_condition = response_dict['sky_condition']
+            lux_rec = time.ctime() + '\t' + lux.__str__() + '\t' + sky_condition.__str__()
             fp_out.write(lux_rec + '\n')
             fp_out.flush()
             print(lux_rec)
