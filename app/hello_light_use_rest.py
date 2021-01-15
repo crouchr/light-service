@@ -10,7 +10,7 @@ endpoint_base = 'http://192.168.1.180:' + listen_port.__str__() # mrdell
 
 def main():
     try:
-        sleep_mins = 1
+        sleep_mins = 10
         sleep_secs = sleep_mins * 60
 
         query = {}
@@ -21,7 +21,6 @@ def main():
         fp_out = open('../data/lux.tsv', 'w')
 
         while True:
-
             status_code, response_dict = call_rest_api.call_rest_api(endpoint_base + '/get_lux', query)
             lux = response_dict['lux']
             lux_rec = time.ctime() + '\t' + lux.__str__()
