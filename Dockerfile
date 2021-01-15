@@ -23,5 +23,5 @@ WORKDIR /app
 EXPOSE 9503
 
 # run Python unbuffered so the logs are flushed
-CMD ["python3", "-u", "light_service.py"]
-#CMD ["tail", "-f", "/dev/null"]
+#CCMD ["python3", "-u", "light_service.py"]
+CMD ["tail", "-f", "/dev/null"]

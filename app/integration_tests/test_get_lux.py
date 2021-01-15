@@ -1,7 +1,3 @@
-from webtest import TestApp
-from light_service import app
-import pytest
-
 import definitions
 import call_rest_api
 

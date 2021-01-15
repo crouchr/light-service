@@ -1,4 +1,3 @@
-
 import definitions
 import call_rest_api
 
