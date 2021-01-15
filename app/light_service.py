@@ -74,7 +74,7 @@ if __name__ == '__main__':
     os.environ['PYTHONUNBUFFERED'] = "1"            # does this help with log buffering ?
     version = light_service_funcs.get_version()     # container version
 
-    print('flight_service started, version=' + version)
+    print('light_service started, version=' + version)
     Sensor, msg = light_sensor.register_light_sensor()  # set up hardware
     print(msg)
 
