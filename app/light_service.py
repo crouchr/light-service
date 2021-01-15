@@ -39,6 +39,20 @@ def status():
     return response
 
 
+@app.route('/stats')
+def stats():
+    answer = {}
+    app_name = request.args.get('app_name')
+
+    answer['status'] = 'OK'
+    answer['api_calls'] = -1    # not yet implemented
+
+    print('status() : app_name=' + app_name.__str__() + ', api_calls=' + answer['api_calls'])
+    response = jsonify(answer)
+
+    return response
+
+
 @app.route('/get_lux')
 def get_lux_api():
     """
@@ -92,5 +106,7 @@ if __name__ == '__main__':
     if Sensor is None:
         time.sleep(3)
         sys.exit()
+
+    # Api_calls = 0   # number of api calls whilst running
 
     app.run(host='0.0.0.0', port=definitions.listen_port.__str__())
