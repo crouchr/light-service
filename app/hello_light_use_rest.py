@@ -1,8 +1,11 @@
 # sample program for how to use the functions
-# this runs on node with light sensor physically connected
+# use the rest api
 
 import time
-import light_sensor
+import call_rest_api
+
+listen_port = 9503
+endpoint_base = 'http://192.168.1.180:' + listen_port.__str__() # mrdell
 
 
 def main():
@@ -10,12 +13,17 @@ def main():
         sleep_mins = 1
         sleep_secs = sleep_mins * 60
 
-        sensor = light_sensor.register_light_sensor()
+        query = {}
+        query['app_name'] = 'hello_light_use_rest_api'
+
+        status_code, response_dict = call_rest_api.call_rest_api(endpoint_base + '/status', query)
 
         fp_out = open('../data/lux.tsv', 'w')
 
         while True:
-            lux = light_sensor.get_lux(sensor)
+
+            status_code, response_dict = call_rest_api.call_rest_api(endpoint_base + '/get_lux', query)
+            lux = response_dict['lux']
             lux_rec = time.ctime() + '\t' + lux.__str__()
             fp_out.write(lux_rec + '\n')
             fp_out.flush()
