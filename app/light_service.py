@@ -17,6 +17,7 @@ app = Flask(__name__)
 def error_handling(error):
     answer = {}
     answer['error'] = str(error)
+
     print('light_service() : error : ' + error.__str__())
     response = jsonify(answer, 500)
 
