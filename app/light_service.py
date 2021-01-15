@@ -51,9 +51,11 @@ def get_lux_api():
 
         # very crude averaging - take two readings with 1 second between
         lux1 = light_sensor.get_lux(Sensor)
-        time.sleep(1)
+        time.sleep(0.5)
         lux2 = light_sensor.get_lux(Sensor)
-        lux = (lux1 + lux2) / 2.0
+        time.sleep(0.5)
+        lux3 = light_sensor.get_lux(Sensor)
+        lux = (lux1 + lux2 + lux3) / 3.0
 
         sky_condition = light_service_funcs.map_lux_to_sky_condition(lux)
 
