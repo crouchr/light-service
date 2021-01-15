@@ -1,3 +1,5 @@
+# sample program for how to use the functions
+
 import time
 import light_sensor
 
