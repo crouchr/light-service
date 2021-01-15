@@ -5,6 +5,7 @@ LABEL description="Light measurement microservice"
 # Generate logs in unbuffered mode
 ENV PYTHONUNBUFFERED=1
 
+# install Yoctopuce dependencies
 RUN apt-get -y update
 RUN apt-get -y install libusb-1.0.0 libusb-1.0.0-dev
 
@@ -18,6 +19,7 @@ RUN mkdir /app
 COPY app/*.py /app/
 WORKDIR /app
 
+# see value in definitions.py
 EXPOSE 9503
 
 # run Python unbuffered so the logs are flushed
