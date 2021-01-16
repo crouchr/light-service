@@ -9,7 +9,9 @@ def get_version():
 
     return version
 
+
 # fixme : add time so that 'sunset/sunrise' can be added
+# fixme - full moon is not reliable
 def map_lux_to_sky_condition(lux):
     """
 
@@ -17,8 +19,6 @@ def map_lux_to_sky_condition(lux):
     :return:
     >>> map_lux_to_sky_condition(0.1)
     'dark'
-    >>> map_lux_to_sky_condition(0.2)
-    'full moon'
     >>> map_lux_to_sky_condition(8.0)
     'twilight'
     >>> map_lux_to_sky_condition(100.0)
@@ -30,8 +30,8 @@ def map_lux_to_sky_condition(lux):
     """
     if lux <= 0.1:
         condition = 'dark'
-    elif lux <= 0.2:
-        condition = 'full moon'
+    # elif lux <= 0.2:
+    #     condition = 'full moon'
     elif lux <= 10:
         condition = 'twilight'
     elif lux <= 1000:
@@ -44,3 +44,12 @@ def map_lux_to_sky_condition(lux):
     return condition
 
 
+def calc_watts(lux):
+    """
+    Convert lux to watt/mm squared
+    :param lux:
+    :return:
+    """
+    watts = round((lux * 0.0079), 2)
+
+    return watts
