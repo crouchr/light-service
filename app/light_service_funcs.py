@@ -1,5 +1,3 @@
-
-
 # fixme : add time so that 'sunset/sunrise' can be added
 # fixme - full moon is not reliable
 def map_lux_to_sky_condition(lux):
