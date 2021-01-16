@@ -8,6 +8,7 @@ from flask import Flask, jsonify, request
 import light_sensor
 import light_service_funcs
 import definitions
+import get_version
 
 app = Flask(__name__)
 
@@ -31,7 +32,7 @@ def status():
     app_name = request.args.get('app_name')
 
     answer['status'] = 'OK'
-    answer['version'] = light_service_funcs.get_version()
+    answer['version'] = get_version.get_version()
 
     print('status() : app_name=' + app_name.__str__() + ', version=' + answer['version'])
     response = jsonify(answer)
@@ -98,9 +99,9 @@ def get_lux_api():
 
 if __name__ == '__main__':
     os.environ['PYTHONUNBUFFERED'] = "1"            # does this help with log buffering ?
-    version = light_service_funcs.get_version()     # container version
+    version = get_version.get_version()             # container version
 
-    print('light_service started, version=' + version)
+    print('light-service started, version=' + version)
     Sensor, msg = light_sensor.register_light_sensor()  # set up hardware
     print(msg)
 
