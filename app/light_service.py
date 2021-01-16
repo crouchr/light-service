@@ -79,7 +79,7 @@ def get_lux_api():
 
         # Create response
         answer['status'] = 'OK'
-        answer['lux'] = lux
+        answer['lux'] = lux_avg
         answer['watts'] = light_service_funcs.calc_watts(lux)
         answer['sky_condition'] = sky_condition
 
