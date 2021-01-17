@@ -16,10 +16,8 @@ def map_lux_to_sky_condition(lux):
     >>> map_lux_to_sky_condition(50000.0)
     'bright sky'
     """
-    if lux <= 0.1:
+    if lux <= 1:
         condition = 'dark'
-    # elif lux <= 0.2:
-    #     condition = 'full moon'
     elif lux <= 10:
         condition = 'twilight'
     elif lux <= 1000:
