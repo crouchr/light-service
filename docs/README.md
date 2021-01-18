@@ -17,3 +17,4 @@ https://www.yoctopuce.com/EN/article/how-to-begin-with-yoctopuce-devices-on-linu
 docker build -t lux . 
 
 docker run -it --device /dev/bus/usb:/dev/bus/usb lux:latest 
+
