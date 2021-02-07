@@ -33,6 +33,7 @@ def status():
     uuid = request.args.get('uuid')
 
     answer['status'] = 'OK'
+    answer['uuid'] = uuid.__str__()
     answer['service_name'] = 'light-service'
     answer['version'] = get_env.get_version()
 
