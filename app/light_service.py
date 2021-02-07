@@ -30,12 +30,13 @@ def error_handling(error):
 def status():
     answer = {}
     app_name = request.args.get('app_name')
+    uuid = request.args.get('uuid')
 
     answer['status'] = 'OK'
     answer['service_name'] = 'light-service'
     answer['version'] = get_env.get_version()
 
-    print('status() : app_name=' + app_name.__str__() + ', version=' + answer['version'])
+    print('status() : uuid=' + uuid + ', app_name=' + app_name.__str__() + ', version=' + answer['version'])
     response = jsonify(answer)
 
     return response
@@ -45,11 +46,12 @@ def status():
 def stats():
     answer = {}
     app_name = request.args.get('app_name')
+    uuid = request.args.get('uuid')
 
     answer['status'] = 'OK'
     answer['api_calls'] = -1    # not yet implemented
 
-    print('status() : app_name=' + app_name.__str__() + ', api_calls=' + answer['api_calls'])
+    print('status() : uuid=' + uuid + ', app_name=' + app_name.__str__() + ', api_calls=' + answer['api_calls'])
     response = jsonify(answer)
 
     return response
@@ -65,6 +67,7 @@ def get_lux_api():
     try:
         answer = {}
         app_name = request.args.get('app_name')
+        uuid = request.args.get('uuid')
 
         # very crude averaging - take two readings with 1 second between
         lux1 = light_sensor.get_lux(Sensor)
@@ -77,10 +80,11 @@ def get_lux_api():
 
         sky_condition = light_service_funcs.map_lux_to_sky_condition(lux_avg)
 
-        print('get_lux_api() : app_name=' + app_name.__str__() + ', lux=' + lux_avg.__str__(), 'sky_condition=' + sky_condition)
+        print('get_lux_api() : uuid=' + uuid + ', app_name=' + app_name.__str__() + ', lux=' + lux_avg.__str__(), 'sky_condition=' + sky_condition)
 
         # Create response
         answer['status'] = 'OK'
+        answer['uuid'] = uuid
         answer['lux'] = lux_avg
         answer['watts'] = light_service_funcs.calc_watts(lux)
         answer['sky_condition'] = sky_condition
@@ -91,8 +95,9 @@ def get_lux_api():
 
     except Exception as e:
         answer['function'] = 'get_lux_api()'
+        answer['uuid'] = uuid
         answer['error'] = str(e)
-        print('get_lux_api() : app_name=' + app_name.__str__() + ', error : ' + e.__str__())
+        print('get_lux_api() : uuid=' + uuid + ', app_name=' + app_name.__str__() + ', error : ' + e.__str__())
         response = jsonify(answer, 500)
 
         return response
@@ -107,9 +112,8 @@ if __name__ == '__main__':
     print(msg)
 
     if Sensor is None:
-        time.sleep(3)
+        time.sleep(1)
+        print('light-service unable to access light sensor, exiting...')
         sys.exit()
-
-    # Api_calls = 0   # number of api calls whilst running
 
     app.run(host='0.0.0.0', port=definitions.listen_port.__str__())

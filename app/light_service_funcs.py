@@ -32,10 +32,10 @@ def map_lux_to_sky_condition(lux):
 
 def calc_watts(lux):
     """
-    Convert lux to watt/mm squared
+    Convert lux to watt/metre squared
     :param lux:
     :return:
     """
-    watts = round((lux * 0.0079), 2)
+    watts = round((lux * 0.0079), 3)
 
     return watts

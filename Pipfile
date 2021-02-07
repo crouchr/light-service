@@ -9,6 +9,7 @@ flask = "==1.1.2"
 requests = "==2.25.1"
 pytest = "==6.2.1"
 webtest = "==2.0.35"
+uuid = "==1.30"
 
 [dev-packages]
 

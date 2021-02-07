@@ -1,4 +1,3 @@
-
 from yoctopuce.yocto_lightsensor import *
 
 
@@ -10,22 +9,23 @@ def register_light_sensor(target='any'):
 
         # Setup the API to use local USB devices
         if YAPI.RegisterHub("usb", errmsg) != YAPI.SUCCESS:
-            msg = "light sensor init error" + errmsg.value
+            msg = "Error : light sensor init error" + errmsg.value
             return None, msg
 
         if target == 'any':
             # retrieve any Light sensor
             sensor = YLightSensor.FirstLightSensor()
             if sensor is None:
-                msg = 'check light sensor USB cable'
+                msg = 'Error : check light sensor USB cable'
                 return None, msg
         else:
             sensor = YLightSensor.FindLightSensor(target + '.lightSensor')
 
         if not (sensor.isOnline()):
-            msg = 'light sensor device not connected'
+            msg = 'Error : light sensor device not connected'
             return None, msg
 
+        print('light sensor registered OK')
         return sensor, 'light sensor registered OK'
 
     except Exception as e:
@@ -44,8 +44,7 @@ def get_lux(sensor):
     if sensor.isOnline():
         lux = sensor.get_currentValue()
         if lux < 0.1:
-            lux = 0.0       # headlights of passing cars ?
+            lux = 0.0           # headlights of passing cars ?
         return lux
     else:
         return None
-

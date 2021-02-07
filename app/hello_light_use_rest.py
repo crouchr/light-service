@@ -2,10 +2,12 @@
 # use the rest api
 
 import time
+import uuid
+
 import call_rest_api
 
 listen_port = 9503
-endpoint_base = 'http://192.168.1.180:' + listen_port.__str__() # mrdell
+endpoint_base = 'http://192.168.1.180:' + listen_port.__str__()     # mrdell
 
 
 def main():
@@ -23,11 +25,13 @@ def main():
         fp_out = open('../data/lux.tsv', 'a')   # file will get infinite length
 
         while True:
+            query['uuid'] = uuid.uuid4().__str__()
             status_code, response_dict = call_rest_api.call_rest_api(endpoint_base + '/get_lux', query)
             lux = response_dict['lux']
             watts = response_dict['watts']
             sky_condition = response_dict['sky_condition']
             lux_rec = time.ctime() + '\t' + lux.__str__() + '\t' +\
+                      uuid.__str__() + '\t' + \
                       watts.__str__() + '\t' +\
                       sky_condition.__str__() + '\t' +\
                       light_service_version.__str__()
