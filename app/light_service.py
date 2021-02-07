@@ -49,7 +49,8 @@ def stats():
     uuid = request.args.get('uuid')
 
     answer['status'] = 'OK'
-    answer['api_calls'] = -1    # not yet implemented
+    answer['uuid'] = uuid.__str__()
+    # answer['api_calls'] = -1    # not yet implemented
 
     print('status() : uuid=' + uuid + ', app_name=' + app_name.__str__() + ', api_calls=' + answer['api_calls'])
     response = jsonify(answer)
@@ -80,11 +81,11 @@ def get_lux_api():
 
         sky_condition = light_service_funcs.map_lux_to_sky_condition(lux_avg)
 
-        print('get_lux_api() : uuid=' + uuid + ', app_name=' + app_name.__str__() + ', lux=' + lux_avg.__str__(), 'sky_condition=' + sky_condition)
+        print('get_lux_api() : uuid=' + uuid.__str__() + ', app_name=' + app_name.__str__() + ', lux=' + lux_avg.__str__(), 'sky_condition=' + sky_condition)
 
         # Create response
         answer['status'] = 'OK'
-        answer['uuid'] = uuid
+        answer['uuid'] = uuid.__str__()
         answer['lux'] = lux_avg
         answer['watts'] = light_service_funcs.calc_watts(lux)
         answer['sky_condition'] = sky_condition
