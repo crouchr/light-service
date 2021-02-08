@@ -81,14 +81,15 @@ def get_lux_api():
         lux_avg = round(lux, 2)
 
         sky_condition = light_service_funcs.map_lux_to_sky_condition(lux_avg)
+        watts = light_service_funcs.calc_watts(lux)
 
-        print('get_lux_api() : uuid=' + uuid.__str__() + ', app_name=' + app_name.__str__() + ', lux=' + lux_avg.__str__(), 'sky_condition=' + sky_condition)
+        print('get_lux_api() : uuid=' + uuid.__str__() + ', app_name=' + app_name.__str__() + ', lux=' + lux_avg.__str__() + ', solar=' + watts.__str__() + ', sky_condition=' + sky_condition)
 
         # Create response
         answer['status'] = 'OK'
         answer['uuid'] = uuid.__str__()
         answer['lux'] = lux_avg
-        answer['watts'] = light_service_funcs.calc_watts(lux)
+        answer['watts'] = watts
         answer['sky_condition'] = sky_condition
 
         response = jsonify(answer)
