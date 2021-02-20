@@ -17,6 +17,7 @@ def main():
 
         query = {}
         query['app_name'] = 'hello_light_use_rest_api'
+        query['uuid'] = uuid.uuid4().__str__()
 
         status_code, response_dict = call_rest_api.call_rest_api(endpoint_base + '/status', query)
         light_service_version = response_dict['version']
@@ -31,7 +32,7 @@ def main():
             watts = response_dict['watts']
             sky_condition = response_dict['sky_condition']
             lux_rec = time.ctime() + '\t' + lux.__str__() + '\t' +\
-                      uuid.__str__() + '\t' + \
+                      query['uuid'].__str__() + '\t' + \
                       watts.__str__() + '\t' +\
                       sky_condition.__str__() + '\t' +\
                       light_service_version.__str__()

@@ -1,6 +1,6 @@
 import requests
 import json
-
+from pprint import pprint
 
 # FIXME : add retries, authentication etc in the future
 # returning 200 even if return data is not good - this should be 500 ?
@@ -12,6 +12,9 @@ def call_rest_api(endpoint, query):
     :param query: e.g. query = {'wind_deg': wind_deg}
     :return:
     """
+    print('call_rest_api() : endpoint=' + endpoint)
+    if query is not None:
+        pprint(query.__str__())
 
     response = requests.get(endpoint, params=query)
     if response.status_code != 200:
