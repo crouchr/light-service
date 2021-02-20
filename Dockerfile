@@ -9,7 +9,7 @@ ENV TZ=Europe/London
 ENV PYTHONUNBUFFERED=1
 
 RUN apt-get -y update
-RUN apt-get -y upgrade
+#RUN apt-get -y upgrade
 
 # install Yoctopuce dependencies
 RUN apt-get -y install libusb-1.0.0 libusb-1.0.0-dev joe
