@@ -5,8 +5,10 @@ import sys
 
 from flask import Flask, jsonify, request
 
+# artifacts
+import metfuncs
+
 import light_sensor
-import light_service_funcs
 import definitions
 import get_env
 
@@ -80,8 +82,8 @@ def get_lux_api():
         lux = (lux1 + lux2 + lux3) / 3.0
         lux_avg = round(lux, 2)
 
-        sky_condition = light_service_funcs.map_lux_to_sky_condition(lux_avg)
-        watts = light_service_funcs.calc_watts(lux)
+        sky_condition = metfuncs.map_lux_to_sky_condition(lux_avg)
+        watts = metfuncs.convert_lux_to_watts(lux)
 
         print('get_lux_api() : uuid=' + uuid.__str__() + ', app_name=' + app_name.__str__() + ', lux=' + lux_avg.__str__() + ', solar=' + watts.__str__() + ', sky_condition=' + sky_condition)
 
@@ -116,7 +118,7 @@ if __name__ == '__main__':
 
     if Sensor is None:
         time.sleep(1)
-        print('light-service unable to access light sensor, exiting...')
+        print('light-service unable to access Yoctopuce light sensor, exiting...')
         sys.exit()
 
     app.run(host='0.0.0.0', port=definitions.listen_port.__str__())
