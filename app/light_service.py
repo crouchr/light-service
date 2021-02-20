@@ -6,7 +6,7 @@ import sys
 from flask import Flask, jsonify, request
 
 # artifacts
-import metfuncs
+import solar_funcs
 
 import light_sensor
 import definitions
@@ -82,8 +82,8 @@ def get_lux_api():
         lux = (lux1 + lux2 + lux3) / 3.0
         lux_avg = round(lux, 2)
 
-        sky_condition = metfuncs.map_lux_to_sky_condition(lux_avg)
-        watts = metfuncs.convert_lux_to_watts(lux)
+        sky_condition = solar_funcs.map_lux_to_sky_condition(lux_avg)
+        watts = solar_funcs.convert_lux_to_watts(lux)
 
         print('get_lux_api() : uuid=' + uuid.__str__() + ', app_name=' + app_name.__str__() + ', lux=' + lux_avg.__str__() + ', solar=' + watts.__str__() + ', sky_condition=' + sky_condition)
 
